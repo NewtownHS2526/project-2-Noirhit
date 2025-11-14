@@ -1,29 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Hub</title>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="#">Page 2</a>
-        <a href="#">Page 3</a>
-        <a href="#">Page 4</a>
-        <a href="#">Page 5</a>
-        <a href="#">Page 6</a>
-      </nav>
-    </header>
-    <main>
-      <section>
-        <h1>Project Overview</h1>
-        <p>Welcome! Replace this text with your project introduction.</p>
-      </section>
-    </main>
-    <footer>
-      <small>&copy; 2025 Project Hub</small>
-    </footer>
-  </body>
-</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { overflow: hidden; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="range"]::-webkit-slider-track {
+            background: #4d4d4d;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #fff;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            margin-top: -4px;
+        }
+        input[type="range"]:hover::-webkit-slider-thumb {
+            background: #1db954;
+        }
+        input[type="range"]::-moz-range-track {
+            background: #4d4d4d;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type="range"]::-moz-range-thumb {
+            background: #fff;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            border: none;
+        }
+        
+        .playlist-card:hover .play-button {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .play-button {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover { color: #fff; }
+        .sidebar-link.active { color: #fff; }
+        .song-row:hover { background: #2a2a2a; }
+        .page { display: none; }
+        .page.active { display: block; }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    
+    <!-- 
+    ================================================================================
+    FILE: index.html (MAIN LAYOUT)
+    ================================================================================
+    This would be your main layout file that includes the sidebar and player
+    -->
+    
+    <div class="flex h-screen flex-col">
+        <div class="flex flex-1 overflow-hidden">
+            
+            <!-- 
+            ================================================================================
+            FILE: components/sidebar.html
+            ================================================================================
+            -->
+            <div class="w-64 bg-black p-6 flex flex-col">
+                <div class="mb-8">
+                    <svg className="w-32 h-10" viewBox="0 0 1134 340" fill="white">
+                        <path d="M8.5 2.5C3.8 2.5 0 6.3 0 11v24c0 4.7 3.8 8.5 8.5 8.5H56c4.7 0 8.5-3.8 8.5-8.5V11c0-4.7-3.8-8.5-8.5-8.5h-47.5zm108.7 0c-4.7 0-8.5 3.8-8.5 8.5v24c0 4.7 3.8 8.5 8.5 8.5h47.5c4.7 0 8.5-3.8 8.5-8.5V11c0-4.7-3.8-8.5-8.5-8.5h-47.5zm0 0"/>
+                        <text x="10" y="30" fill="white" font-size="24" font-weight="bold" font-family="Arial">Spotify</text>
+                    </svg>
+                </div>
+                
+                <nav class="flex-1">
+                    <a href="#" onclick="navigateTo('home')" id="nav-home" class="sidebar-link active flex items-center gap-4 text-gray-400 py-3 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3l10 9h-3v9h-5v-6h-4v6H5v-9H2l10-9z"/></svg>
+                        <span class="font-semibold">Home</span>
+                    </a>
+                    <a href="#" onclick="navigateTo('search')" id="nav-search" class="sidebar-link flex items-center gap-4 text-gray-400 py-3 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        <span class="font-semibold">Search</span>
+                    </a>
+                    <a href="#" onclick="navigateTo('library')" id="nav-library" class="sidebar-link flex items-center gap-4 text-gray-400 py-3 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+                        <span class="font-semibold">Your Library</span>
+                    </a>
+                    <a href="#" onclick="navigateTo('playlist')" id="nav-playlist" class="sidebar-link flex items-center gap-4 text-gray-400 py-3 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z"/></svg>
+                        <span class="font-semibold">Playlist View</span>
+                    </a>
+                    
+                    <div class="mt-6">
+                        <a href="#" class="sidebar-link flex items-center gap-4 text-gray-400 py-3 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                            <span class="font-semibold">Create Playlist</span>
+                        </a>
+                        <a href="#" class="sidebar-link flex items-center gap-4 text-gray-400 py-3 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            <span class="font-semibold">Liked Songs</span>
+                        </a>
+                    </div>
+                </nav>
+                
+                <div class="mt-4 pt-4 border-t border-gray-800">
+                    <a href="#" class="text-xs text-gray-400 hover:text-white">Legal</a>
+                    <a href="#" class="text-xs text-gray-400 hover:text-white ml-4">Privacy Center</a>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                
+                <!-- 
+                ================================================================================
+                FILE: components/header.html
+                ================================================================================
+                -->
+                <header class="flex items-center justify-between p-4 bg-gradient-to-b from-gray-900 to-transparent">
+                    <div class="flex gap-4">
+                        <button class="w-8 h-8 bg-black bg-opacity-70 rounded-full flex items-center justify-center hover:bg-opacity-90">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                        </button>
+                        <button class="w-8 h-8 bg-black bg-opacity-70 rounded-full flex items-center justify-center hover:bg-opacity-90">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="px-8 py-2 bg-white text-black rounded-full font-semibold text-sm hover:scale-105 transition">Upgrade</button>
+                        <button class="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:scale-105 transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- 
+                ================================================================================
+                FILE: pages/home.html
+                ================================================================================
+                -->
+                <div id="page-home" class="page active flex-1 overflow-y-auto scrollbar-hide bg-gradient-to-b from-gray-900 to-black p-8">
+                    <h1 class="text-3xl font-bold mb-6">Good afternoon</h1>
+                    
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="flex items-center bg-gray-800 bg-opacity-40 rounded hover:bg-gray-700 transition cursor-pointer group">
+                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=80&h=80&fit=crop" alt="Liked Songs" class="w-20 h-20 rounded-l">
+                            <span class="ml-4 font-semibold">Liked Songs</span>
+                            <button class="ml-auto mr-4 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg hover:scale-105">
+                                <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                        </div>
+                        <div class="flex items-center bg-gray-800 bg-opacity-40 rounded hover:bg-gray-700 transition cursor-pointer group">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&h=80&fit=crop" alt="Daily Mix 1" class="w-20 h-20 rounded-l">
+                            <span class="ml-4 font-semibold">Daily Mix 1</span>
+                            <button class="ml-auto mr-4 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg hover:scale-105">
+                                <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                        </div>
+                        <div class="flex items-center bg-gray-800 bg-opacity-40 rounded hover:bg-gray-700 transition cursor-pointer group">
+                            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=80&h=80&fit=crop" alt="Discover Weekly" class="w-20 h-20 rounded-l">
+                            <span class="ml-4 font-semibold">Discover Weekly</span>
+                            <button class="ml-auto mr-4 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg hover:scale-105">
+                                <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-4">Made for you</h2>
+                    <div class="grid grid-cols-5 gap-6 mb-8">
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Daily Mix 1</h3>
+                            <p class="text-sm text-gray-400 truncate">The Weeknd, Post Malone, and more</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Discover Weekly</h3>
+                            <p class="text-sm text-gray-400 truncate">Your weekly mixtape of fresh music</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Release Radar</h3>
+                            <p class="text-sm text-gray-400 truncate">Catch new music from artists you love</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Chill Hits</h3>
+                            <p class="text-sm text-gray-400 truncate">Kick back to the best new and recent chill</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Focus Flow</h3>
+                            <p class="text-sm text-gray-400 truncate">Uptempo instrumental hip hop beats</p>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-4">Recently played</h2>
+                    <div class="grid grid-cols-5 gap-6">
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1415886541506-6efc5e4b1786?w=200&h=200&fit=crop" alt="Album" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Midnight Memories</h3>
+                            <p class="text-sm text-gray-400 truncate">Various Artists</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200&h=200&fit=crop" alt="Album" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Summer Vibes</h3>
+                            <p class="text-sm text-gray-400 truncate">Beach Boys</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=200&h=200&fit=crop" alt="Album" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Jazz Classics</h3>
+                            <p class="text-sm text-gray-400 truncate">Miles Davis</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop" alt="Album" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Rock Anthems</h3>
+                            <p class="text-sm text-gray-400 truncate">Queen</p>
+                        </div>
+                        <div class="playlist-card bg-gray-900 bg-opacity-40 p-4 rounded hover:bg-gray-800 transition cursor-pointer relative group">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=200&h=200&fit=crop" alt="Album" class="w-full rounded shadow-lg">
+                                <button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 hover:bg-green-400">
+                                    <svg class="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2 truncate">Electronic Dreams</h3>
+                            <p class="text-sm text-gray-400 truncate">Daft Punk</p>
+                        </div>
+                    </div>
+                </div>
+
+               
