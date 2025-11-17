@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Spotify Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white h-screen flex">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 p-6">
+        <h1 class="text-2xl font-bold mb-8">Spotify</h1>
+        <nav class="space-y-4">
+            <a href="index.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>🏠</span> Home
+            </a>
+            <a href="search.html" class="flex items-center gap-3 text-white font-semibold">
+                <span>🔍</span> Search
+            </a>
+            <a href="library.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>📚</span> Library
+            </a>
+            <a href="playlist.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>🎵</span> Playlist
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8 bg-gradient-to-b from-gray-800 to-black">
+        <h2 class="text-3xl font-bold mb-6">Search</h2>
+        
+        <!-- Search Bar -->
+        <input type="text" placeholder="What do you want to listen to?" 
+               class="w-full max-w-md mb-8 px-4 py-3 rounded-full bg-white text-black font-semibold">
+        
+        <h3 class="text-xl font-bold mb-4">Browse all</h3>
+        
+        <!-- Categories Grid -->
+        <div class="grid grid-cols-4 gap-4">
+            <div class="bg-pink-600 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">Pop</h4>
+            </div>
+            
+            <div class="bg-indigo-800 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">Hip-Hop</h4>
+            </div>
+            
+            <div class="bg-orange-500 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">Rock</h4>
+            </div>
+            
+            <div class="bg-green-600 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">Latin</h4>
+            </div>
+            
+            <div class="bg-red-600 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">Podcasts</h4>
+            </div>
+            
+            <div class="bg-blue-700 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">Country</h4>
+            </div>
+            
+            <div class="bg-purple-700 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">R&B</h4>
+            </div>
+            
+            <div class="bg-yellow-600 rounded-lg p-6 h-40 cursor-pointer hover:scale-105 transition">
+                <h4 class="text-2xl font-bold">Jazz</h4>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

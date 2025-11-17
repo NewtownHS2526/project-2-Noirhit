@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist - Spotify Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white h-screen flex">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 p-6">
+        <h1 class="text-2xl font-bold mb-8">Spotify</h1>
+        <nav class="space-y-4">
+            <a href="index.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>🏠</span> Home
+            </a>
+            <a href="search.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>🔍</span> Search
+            </a>
+            <a href="library.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>📚</span> Library
+            </a>
+            <a href="playlist.html" class="flex items-center gap-3 text-white font-semibold">
+                <span>🎵</span> Playlist
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto bg-gradient-to-b from-purple-900 to-black">
+        <!-- Playlist Header -->
+        <div class="p-8 flex items-end gap-6">
+            <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&h=200&fit=crop" alt="Playlist" class="w-48 h-48 rounded shadow-2xl">
+            <div>
+                <p class="text-sm font-bold mb-2">PLAYLIST</p>
+                <h1 class="text-5xl font-bold mb-4">Daily Mix 1</h1>
+                <p class="text-sm">Spotify • 50 songs</p>
+            </div>
+        </div>
+
+        <!-- Play Button -->
+        <div class="px-8 py-6">
+            <button class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:scale-105 transition">
+                <span class="text-2xl text-black ml-1">▶</span>
+            </button>
+        </div>
+
+        <!-- Song List -->
+        <div class="px-8 space-y-2">
+            <div class="grid grid-cols-12 gap-4 px-4 py-2 text-sm text-gray-400 border-b border-gray-700">
+                <div class="col-span-1">#</div>
+                <div class="col-span-6">TITLE</div>
+                <div class="col-span-4">ALBUM</div>
+                <div class="col-span-1 text-right">⏱</div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-800 rounded transition cursor-pointer">
+                <div class="col-span-1 text-gray-400">1</div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Blinding Lights</div>
+                    <div class="text-sm text-gray-400">The Weeknd</div>
+                </div>
+                <div class="col-span-4 text-sm text-gray-400">After Hours</div>
+                <div class="col-span-1 text-right text-sm text-gray-400">3:20</div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-800 rounded transition cursor-pointer">
+                <div class="col-span-1 text-gray-400">2</div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Circles</div>
+                    <div class="text-sm text-gray-400">Post Malone</div>
+                </div>
+                <div class="col-span-4 text-sm text-gray-400">Hollywood's Bleeding</div>
+                <div class="col-span-1 text-right text-sm text-gray-400">3:35</div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-800 rounded transition cursor-pointer">
+                <div class="col-span-1 text-gray-400">3</div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Levitating</div>
+                    <div class="text-sm text-gray-400">Dua Lipa</div>
+                </div>
+                <div class="col-span-4 text-sm text-gray-400">Future Nostalgia</div>
+                <div class="col-span-1 text-right text-sm text-gray-400">3:23</div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-800 rounded transition cursor-pointer">
+                <div class="col-span-1 text-gray-400">4</div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Save Your Tears</div>
+                    <div class="text-sm text-gray-400">The Weeknd</div>
+                </div>
+                <div class="col-span-4 text-sm text-gray-400">After Hours</div>
+                <div class="col-span-1 text-right text-sm text-gray-400">3:35</div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-800 rounded transition cursor-pointer">
+                <div class="col-span-1 text-gray-400">5</div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Peaches</div>
+                    <div class="text-sm text-gray-400">Justin Bieber</div>
+                </div>
+                <div class="col-span-4 text-sm text-gray-400">Justice</div>
+                <div class="col-span-1 text-right text-sm text-gray-400">3:18</div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-800 rounded transition cursor-pointer">
+                <div class="col-span-1 text-gray-400">6</div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Good 4 U</div>
+                    <div class="text-sm text-gray-400">Olivia Rodrigo</div>
+                </div>
+                <div class="col-span-4 text-sm text-gray-400">SOUR</div>
+                <div class="col-span-1 text-right text-sm text-gray-400">2:58</div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

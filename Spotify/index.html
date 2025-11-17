@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Spotify Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white h-screen flex">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 p-6">
+        <h1 class="text-2xl font-bold mb-8">Spotify</h1>
+        <nav class="space-y-4">
+            <a href="index.html" class="flex items-center gap-3 text-white font-semibold">
+                <span>🏠</span> Home
+            </a>
+            <a href="search.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>🔍</span> Search
+            </a>
+            <a href="library.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>📚</span> Library
+            </a>
+            <a href="playlist.html" class="flex items-center gap-3 text-gray-400 hover:text-white">
+                <span>🎵</span> Playlist
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8 bg-gradient-to-b from-gray-800 to-black">
+        <h2 class="text-3xl font-bold mb-6">Good afternoon</h2>
+        
+        <!-- Playlists Grid -->
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded mb-4">
+                <h3 class="font-bold mb-2">Liked Songs</h3>
+                <p class="text-sm text-gray-400">142 songs</p>
+            </div>
+            
+            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded mb-4">
+                <h3 class="font-bold mb-2">Daily Mix 1</h3>
+                <p class="text-sm text-gray-400">The Weeknd, Post Malone</p>
+            </div>
+            
+            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded mb-4">
+                <h3 class="font-bold mb-2">Discover Weekly</h3>
+                <p class="text-sm text-gray-400">Fresh music picks</p>
+            </div>
+            
+            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded mb-4">
+                <h3 class="font-bold mb-2">Release Radar</h3>
+                <p class="text-sm text-gray-400">New releases</p>
+            </div>
+            
+            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded mb-4">
+                <h3 class="font-bold mb-2">Chill Hits</h3>
+                <p class="text-sm text-gray-400">Relaxing vibes</p>
+            </div>
+            
+            <div class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200&h=200&fit=crop" alt="Playlist" class="w-full rounded mb-4">
+                <h3 class="font-bold mb-2">Focus Flow</h3>
+                <p class="text-sm text-gray-400">Instrumental beats</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html> 
